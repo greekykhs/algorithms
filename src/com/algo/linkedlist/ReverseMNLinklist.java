@@ -36,7 +36,7 @@ public class ReverseMNLinklist {
 			m--;
 			n--;
 		}
-		ListNode nprevious = previous, ncurrent = current, nnext;
+		ListNode nprevious = previous, ncurrent = current, temp;
 		/* Step 2: Reverse the nodes until n becomes 0. After completion of step 2:
 		 *        a). m will remain 1, and n will be 0.
 		 *        b). current will point to the element at last position.
@@ -45,10 +45,10 @@ public class ReverseMNLinklist {
 		 *        e). ncurrent  will be the element at m position (m which was passed),
 		 *            nprevious will be its previous element. */
 		while (n > 0) {
-			nnext = current.next;
+			temp = current.next;
 			current.next = previous;
 			previous = current;
-			current = nnext;
+			current = temp;
 			n--;
 		}
 		
