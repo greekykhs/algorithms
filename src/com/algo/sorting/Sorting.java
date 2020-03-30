@@ -8,13 +8,31 @@ public class Sorting {
 			System.out.print(i + " ");
 		}
 		System.out.println();
-		insertionSort(arr1);
+		bubbleSort(arr1);
 		System.out.println("After  Sort..");
 		for (int i : arr1) {
 			System.out.print(i + " ");
 		}
 	}
-	
+	public static int[] bubbleSort(int A[])
+	{
+		int length=A.length;
+		int temp;
+		int flag=0;
+		for(int i=0;i<length;i++){
+			for(int j=0; j<length-1-i;j++){
+				if(A[j]>A[j+1]){
+					temp=A[j];
+					A[j]=A[j+1];
+					A[j+1]=temp;
+					flag=1;
+				}				
+			}
+			if(flag==0)
+				break;
+		}		
+		return A;
+	}
 	public static void insertionSort(int A[]) {  
 		int length=A.length;
 		int key, j;
