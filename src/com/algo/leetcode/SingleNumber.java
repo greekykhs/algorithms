@@ -1,4 +1,4 @@
-package com.algo;
+package com.algo.leetcode;
 
 public class SingleNumber {
 
