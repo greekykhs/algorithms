@@ -50,15 +50,15 @@ public class CountingElements {
         }
         for (Map.Entry<Integer, Integer> element : countMap.entrySet()) {
     		if (countMap.containsKey(element.getKey()+1))
-    			elementCount++;
+    			elementCount=elementCount+element.getValue();
     	}
 		return elementCount;
     }
 	public static void main(String[] args) {
 		//int nums[] = {1,2,3};
 		//int nums[] = {1,1,3,3,5,5,7,7}; 
-		int nums[] = {1,3,2,3,5,0}; 
-		//int nums[] = {1,1,2,2}; 
+		//int nums[] = {1,3,2,3,5,0}; 
+		int nums[] = {1,1,2,2}; 
 		System.out.println("***Printing original array:");
 		printArray(nums);
 		System.out.println(new CountingElements().countElements(nums)); 
