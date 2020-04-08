@@ -24,7 +24,6 @@ import java.util.Map;
  * The order of your output does not matter.
  * */
 public class GroupAnagrams {
-
 	/*
 	 * Algorithm:
 	 * To find if two strings are anagram, we need to sort them and compare. 
@@ -59,5 +58,4 @@ public class GroupAnagrams {
         System.out.println(new GroupAnagrams().groupAnagrams(strs));
 
 	}
-
 }
