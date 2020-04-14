@@ -16,7 +16,6 @@ import java.util.HashMap;
  * Note: The length of the given binary array will not exceed 50,000.
  * */
 public class ContiguousArray {
-
 	/*
 	 * Algorithm:
 	 * 1. Replace all the 0's with -1, this will help us to find out 
