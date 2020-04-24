@@ -43,7 +43,7 @@ public class LRUCache {
 		this.capacity=capacity;
 	}
 
-	public int getEntry(int key) {
+	public int get(int key) {
 		//if key already exist, get the value and move the entry on the top
 		if (hashmap.containsKey(key))
 		{
@@ -55,7 +55,7 @@ public class LRUCache {
 		return -1;
 	}
 
-	public void putEntry(int key, int value) {
+	public void put(int key, int value) {
 		//if key already exist, update the value and move the entry on the top
 		if (hashmap.containsKey(key))
 		{
