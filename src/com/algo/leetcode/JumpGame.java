@@ -20,8 +20,8 @@ Output: false
 Explanation: You will always arrive at index 3 no matter what. Its maximum
              jump length is 0, which makes it impossible to reach the last index.
  * */
-public class JumpGame {
 
+public class JumpGame {
 	public boolean canJump(int[] nums) {
 		if (nums.length <= 1)
 			return true;
@@ -44,11 +44,10 @@ public class JumpGame {
 		return false;
 	}
 	public static void main(String[] args) {
-		int[] nums= {2,3,1,1,4};
-		//int[] nums= {3,2,1,0,4};
+		//int[] nums= {2,3,1,1,4};
+		int[] nums= {3,2,1,0,4};
 		
 		System.out.println("Can jump?"+new JumpGame().canJump(nums));
 
 	}
-
 }
