@@ -22,7 +22,29 @@ Explanation: You will always arrive at index 3 no matter what. Its maximum
  * */
 
 public class JumpGame {
+	/*
+	 * Algorithm:
+		1). We will maintain a variable lastAccuratePosition from which 
+			we can reach the last position. Since we can reach the last position from 
+			the last index we initialize lastAccuratePosition with the index of last element (i.e nums.length-1).
+		2). Now we will start iterating the input array from right (second last position) to the left.
+		3). In each iteration we will calculate furthestJump which is the summation of 
+			index and the value at that index (i.e nums[i]+i).
+		4). We will check if furthestJump is greater than or equal to lastAccuratePosition.
+		 	If yes, then we will update the value of lastAccuratePosition with the current index.
+		5). After the iteration we will check if lastAccuratePosition is zero return true, else return false.
+*/
 	public boolean canJump(int[] nums) {
+		int lastAccuratePosition=nums.length-1;
+		int furthestJump=0;
+		for(int i=nums.length-2;i>=0;i--) {
+			furthestJump=nums[i]+i;
+			if(furthestJump>=lastAccuratePosition)
+				lastAccuratePosition=i;
+		}
+		return lastAccuratePosition==0;
+	}
+	public boolean canJump1(int[] nums) {
 		if (nums.length <= 1)
 			return true;
 
@@ -44,8 +66,8 @@ public class JumpGame {
 		return false;
 	}
 	public static void main(String[] args) {
-		//int[] nums= {2,3,1,1,4};
-		int[] nums= {3,2,1,0,4};
+		int[] nums= {2,3,1,1,4};
+		//int[] nums= {3,2,1,0,4};
 		
 		System.out.println("Can jump?"+new JumpGame().canJump(nums));
 

@@ -21,10 +21,10 @@ Explanation: You will always arrive at index 3 no matter what. Its maximum
  * */
 public class JumpGameDynamicProgramming {
 	public static void main(String[] args) {
-		int[] nums= {2,3,1,1,4};
-		//int[] nums= {3,2,1,0,4};		
-//		System.out.println("Can jump?"+new JumpGameDynamicProgramming().canJumpTopDown(nums));
-		System.out.println("Can jump?"+new JumpGameDynamicProgramming().canJumpBottomUp(nums));
+		//int[] nums= {2,3,1,1,4};
+		int[] nums= {3,2,1,0,4};		
+		System.out.println("Can jump?"+new JumpGameDynamicProgramming().canJumpTopDown(nums));
+		//System.out.println("Can jump?"+new JumpGameDynamicProgramming().canJumpBottomUp(nums));
 
 	}	
 	/*
@@ -61,22 +61,44 @@ public class JumpGameDynamicProgramming {
 		
 		return jumpAllowed(0, nums);
 	}
-	 public boolean jumpAllowed(int position, int[] nums) {
-		//If the current position is already marked as YES or NO, return true of false
-		 if(valNums[position]!=VALENUM.DONTNO)
-			 return valNums[position]==VALENUM.GOOD?true:false;
-		 
-		 int furthestJump=Math.min(nums[position]+position, nums.length-1);
-		 for (int nextPosition = position + 1; nextPosition <= furthestJump; nextPosition++) {
-		 	 if(jumpAllowed(nextPosition, nums))
-			 {
-				 valNums[nextPosition]=VALENUM.GOOD;
-				 return true;
-			 }
-		 }
-		 valNums[position]=VALENUM.BAD;
-		 return false;
-	 }
+//	 public boolean jumpAllowed(int position, int[] nums) {
+//		//If the current position is already marked as YES or NO, return true of false
+//		 if(valNums[position]!=VALENUM.DONTNO)
+//			 return valNums[position]==VALENUM.GOOD?true:false;
+//		 
+//		 int furthestJump=Math.min(nums[position]+position, nums.length-1);
+//		 for (int nextPosition = position + 1; nextPosition <= furthestJump; nextPosition++) {
+//		 	 if(jumpAllowed(nextPosition, nums))
+//			 {
+//				 valNums[nextPosition]=VALENUM.GOOD;
+//				 return true;
+//			 }
+//		 }
+//		 valNums[position]=VALENUM.BAD;
+//		 return false;
+//	 }
+    public boolean jumpAllowed(int position, int[] nums) {
+    	System.out.println("***position:"+position+", val num="+valNums[position]);
+    	//If the current position is already marked as YES or NO, return true of false
+        if (valNums[position] != VALENUM.DONTNO) 
+            return valNums[position] == VALENUM.GOOD ? true : false;
+        
+
+        int furthestJump = Math.min(position + nums[position], nums.length - 1);
+        System.out.println("***position:"+position+", val num="+valNums[position]+", furthestJump="+furthestJump);
+        for (int nextPosition = position + 1; nextPosition <= furthestJump; nextPosition++) {
+        	System.out.println("***position:"+position+", val num="+valNums[position]+", nextPosition="+nextPosition);
+            if (jumpAllowed(nextPosition, nums)) {
+                valNums[position] = VALENUM.GOOD;
+               System.out.println("***position:"+position+", new GOOD val num="+valNums[position]);
+                return true;
+            }
+        }
+
+        valNums[position] = VALENUM.BAD;
+        System.out.println("***position:"+position+", new BAD val num="+valNums[position]);
+        return false;
+    }
 	 
 	 /*
 	  * Third Solution of Leet Code's Jump Game problem: Dynamic Programming Bottom-up
