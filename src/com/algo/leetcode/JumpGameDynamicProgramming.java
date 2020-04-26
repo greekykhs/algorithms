@@ -19,11 +19,12 @@ Output: false
 Explanation: You will always arrive at index 3 no matter what. Its maximum
              jump length is 0, which makes it impossible to reach the last index.
  * */
-public class JumpGameTopDown {
+public class JumpGameDynamicProgramming {
 	public static void main(String[] args) {
 		int[] nums= {2,3,1,1,4};
 		//int[] nums= {3,2,1,0,4};		
-		System.out.println("Can jump?"+new JumpGameTopDown().canJump(nums));
+//		System.out.println("Can jump?"+new JumpGameDynamicProgramming().canJumpTopDown(nums));
+		System.out.println("Can jump?"+new JumpGameDynamicProgramming().canJumpBottomUp(nums));
 
 	}	
 	/*
@@ -44,7 +45,7 @@ public class JumpGameTopDown {
 	 * 4). Once we determine the value of the current index, we store it in valNums.
 	 * */
 	VALENUM[] valNums;
-	public boolean canJump(int[] nums) {
+	public boolean canJumpTopDown(int[] nums) {
 		if(nums.length==0)
 			return false;
 		
@@ -65,7 +66,7 @@ public class JumpGameTopDown {
 		 if(valNums[position]!=VALENUM.DONTNO)
 			 return valNums[position]==VALENUM.GOOD?true:false;
 		 
-		 int furthestJump=Math.max(nums[position]+position, nums.length-1);
+		 int furthestJump=Math.min(nums[position]+position, nums.length-1);
 		 for (int nextPosition = position + 1; nextPosition <= furthestJump; nextPosition++) {
 		 	 if(jumpAllowed(nextPosition, nums))
 			 {
@@ -76,6 +77,50 @@ public class JumpGameTopDown {
 		 valNums[position]=VALENUM.BAD;
 		 return false;
 	 }
+	 
+	 /*
+	  * Third Solution of Leet Code's Jump Game problem: Dynamic Programming Bottom-up
+	  * 
+	  * We will change our top-down approach to bottom-up, while doing this we will eliminate the recursion.
+	  *    Since we are not using recursive function jumpAllowed(), we no longer have the method stack overhead.
+	  *    
+	  * In this approach also, we will start marking each index with a certain value (let's say GOOD, BAD 
+	  *    and DONTNO), initially all the index's (except the last one) will be marked as DONTNO. We will 
+	  *    start computing if the index is GOOD or BAD. Once the index is marked as GOOD or BAD, we won't change it.
+	  *    
+	  * We start from the right of the array, every time we will query a position to our right. If that position 
+	  *    has already be determined as being GOOD or BAD, we won't recurse it anymore, as we will always get 
+	  *    the value from valNums.
+	  * */
+	 
+	public boolean canJumpBottomUp(int[] nums) {
+		int length=nums.length;
+		if (length == 0)
+			return false;
+
+		// create a VALENUM with length equal to input array
+		valNums = new VALENUM[length];
+
+		// set all the values in VALENUM as DONTNO
+		for (int i = 0; i < length; i++)
+			valNums[i] = VALENUM.DONTNO;
+
+		// set the last value of VALENUM as GOOD
+		valNums[length - 1] = VALENUM.GOOD;
+
+		int furthestJump;
+		//we will start from right to left
+		for (int i=length-2; i>=0; i--){
+			 furthestJump=Math.min(nums[i]+i, length-1);
+			 for(int j=i+1;j<=furthestJump; j++) {
+				 if(valNums[j]==VALENUM.GOOD) {
+					 valNums[i]=VALENUM.GOOD;
+					 break;
+				 }
+			 }
+		}
+		return valNums[0]==VALENUM.GOOD;
+	}
 }
 enum VALENUM {
     GOOD, BAD, DONTNO
