@@ -1,5 +1,9 @@
 package com.algo.leetcode;
 
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.NoSuchElementException;
+
 /*
  * First Unique Number
 
@@ -68,21 +72,30 @@ At most 50000 calls will be made to showFirstUnique and add.
 */
 public class FirstUnique {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
+	HashSet<Integer> unique=new LinkedHashSet<>();
+	HashSet<Integer> nonunique=new LinkedHashSet<>();
+	
 	public FirstUnique(int[] nums) {
-
+		for(int num:nums)
+			add(num);
 	}
 
 	public int showFirstUnique() {
-		return 0;
+		try {
+			return unique.iterator().next();
+		}catch(NoSuchElementException e) {
+			return -1;
+		}
 	}
 
 	public void add(int value) {
-
+		if(nonunique.contains(value))
+			return;
+		else if (unique.contains(value)) {
+			unique.remove(value);
+			nonunique.add(value);
+			return;
+		}
+		unique.add(value);
 	}
-
 }
