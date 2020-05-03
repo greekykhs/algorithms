@@ -14,32 +14,50 @@ canConstruct("aa", "ab") - > false
 canConstruct("aa", "aab") - > true
  * */
 public class RansomNote {
-
-	 public static void main(String[] args) {        
-		 RansomNote main = new RansomNote();
-	        boolean result = main.canConstruct("aa", "aab");
-	        System.out.println(result);
-	    }
+	public static void main(String[] args) {
+		System.out.println(new RansomNote().canConstruct("aa", "aab"));
+	}
 	     
-	    /* Solution */
-	    public boolean canConstruct(String ransomNote, String magazine) {
-	         
-	        char[] array = magazine.toCharArray();
-	         
-	        int[] countArray = new int[26];        
-	        for(char c : array){            
-	            countArray[c-'a']++;
-	        }
-	         
-	        array = ransomNote.toCharArray();
-	        for(char c : array){   
-	            if(countArray[c-'a'] > 0){
-	                countArray[c-'a']--;
-	            }else {
-	                return false;
-	            }            
-	        }
-	        return true;
-	    }
+	/* Algorithm
+		1). If the ransomNote is null, return true. 
+		2). If magazine is null return false.
+		3). If length of magazine should be always equal to or greater 
+			than ransomNote note. If its less return false.
+		4). Now we will convert the magazine into a charArray. And we 
+			will create another array charCount which will contain 
+			character wise count.
+		5). We will start iterating the charArray, and increase the 
+			count in charCount depending on the character. e.g if the 
+			char is 'a', c-'a' will return 0 and the count at the 1th 
+			position will be incremented. If the char is y, c-'y' will 
+			return 25 and the count at the 25th position will be incremented.
+		6). Now we will reused the same charArray and convert the 
+			ransomNote into array and store in charArray.
+		7). We will start iterating charArray, check if the charCount is 
+			greater than 0 or not for that particular char, 
+			if yes decrement the count. Else return false.*/
+	public boolean canConstruct(String ransomNote, String magazine) {
+		if (ransomNote == null)
+			return true;
+		if (magazine == null)
+			return false;
+		if (magazine.length() < ransomNote.length())
+			return false;
 
+		char[] charArray = magazine.toCharArray();
+		
+		int[] charCount = new int[26];
+		for (char c : charArray) {
+			charCount[c - 'a']++;
+		}
+
+		charArray = ransomNote.toCharArray();
+		for (char c : charArray) {
+			if (charCount[c - 'a'] > 0)
+				charCount[c - 'a']--;
+			else
+				return false;
+		}
+		return true;
+	}
 }
