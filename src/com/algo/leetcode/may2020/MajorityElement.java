@@ -13,7 +13,8 @@ Example 2:
 Input: [2,2,1,1,1,2,2]
 Output: 2*/
 public class MajorityElement {
-	public int majorityElement(int[] nums) {
+	/*Solution 1 using Hash Map*/
+	public int majorityElement1(int[] nums) {
 		if(nums==null || nums.length==0)
 			return -1;
 		else if (nums.length==1)
@@ -33,9 +34,50 @@ public class MajorityElement {
 		}
 		return -1;
 	}
-	public static void main(String[] args) {
-		System.out.println();
-
+	
+	/*Using Boyer–Moore majority vote algorithm
+	1). In this algorithm, we will process each element of the array. 
+		We will maintain a counter (which is initialized with 0), 
+		now let's say the current element is x.
+	2). We will check if the counter is 0, if yes then set the current 
+		candidate to x and increment the counter.
+	3). Else, we need to increment or decrement the counter after 
+		checking whether x is equal to the current candidate or not.		
+	4). After iteration, if the sequence has a majority it will be x.
+	
+	NOTE: The Boyer–Moore majority vote algorithm produces correct result 
+		only when majority element is present in the input.*/
+	public int majorityElement(int[] nums)
+	{
+		if(nums==null || nums.length==0)
+			return -1;
+		else if (nums.length==1)
+			return nums[0];
+		
+		// m stores majority element if present
+		int majorityElement = -1;
+		int length=nums.length, counter=0;
+		
+		for (int i = 0; i < length; i++)
+		{
+			if (counter == 0)			{
+				// set the current candidate to A[j]
+				majorityElement = nums[i];
+				counter++;
+			}
+			// else increment the counter if A[j] is current candidate
+			else if (majorityElement == nums[i])
+				counter++;
+			// decrement the counter if A[j] is not current candidate
+			else
+				counter--;
+		}
+		return majorityElement;
 	}
+	public static void main (String[] args)
+	{
+		int[] nums = {2,2,1,1,1,2,2};
 
+		System.out.println(new MajorityElement().majorityElement(nums));
+	}
 }
