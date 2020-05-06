@@ -14,7 +14,6 @@ return 2.
 
 Note: You may assume the string contain only lowercase letters.*/
 public class FirstUniqueChar {
-
 	public int firstUniqChar(String s) {
         HashMap<Character, Integer> countMap = new HashMap<Character, Integer>();
         int n = s.length();
