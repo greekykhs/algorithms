@@ -10,14 +10,38 @@ We are given the root of a binary tree with unique values, and the values x and 
 Return true if and only if the nodes corresponding to the values x and y are cousins.*/
 public class CousinsInBinaryTree {
 
+	/*Check if the given values x and y are from Sibling nodes*/
+	private boolean isSibling(TreeNode node, int x, int y) {
+        if(node == null) 
+        	return false;
+        
+        boolean checkSibling = false;
+        //if left and right nodes are present, compare the values
+        if(node.left != null && node.right != null)
+            checkSibling = (node.left.val == x && node.right.val == y) ||
+            			   (node.left.val == y && node.right.val == x);
+        
+        return checkSibling || isSibling(node.left, x, y) || isSibling(node.right, x, y);
+    }
+	
+	private int findDepth(TreeNode node, int val, int height) {
+        if(node == null) 
+        	return 0;
+        if(node.val == val) 
+        	return height;
+        
+        //check if the node is present in left subtree, if yes then return it
+        int level = findDepth(node.left, val, height + 1); 
+        if (level != 0) 
+            return level; 
+  
+        // if the node is not present in left subtree,check in right
+        return findDepth(node.right, val, height + 1);
+    }
+
 	public boolean isCousins(TreeNode root, int x, int y) {
-		return false;
+		return findDepth(root,x,1) == findDepth(root,y,1) && !isSibling(root,x,y); 
 	}
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
 }
 
 class TreeNode {
