@@ -39,6 +39,7 @@ public class CousinsInBinaryTreeDFS {
 	}
 }
 
+/*
 class TreeNode {
 	int val;
 	TreeNode left;
@@ -57,3 +58,4 @@ class TreeNode {
 		this.right = right;
 	}
 }
+*/
