@@ -45,7 +45,27 @@ trust[i] are all different
 trust[i][0] != trust[i][1]
 1 <= trust[i][0], trust[i][1] <= N
  * */
-public class FindTheTownJudge {	
+public class FindTheTownJudge {
+	/*
+	 * Algorithm
+	 * We can solve this problem by visualizing the graph. 
+	 * Draw N vertices's and start drawing the relationships.
+	 * 		[1,3] means vertex 1 trust vertex 3.
+	 * 		[2,3] means vertex 2 trust vertex 3.
+	 * 
+	 * Now create two arrays, indegree and outdegree.
+	 * 		# indegree[x] represents the numbers of edges incoming to a vertex x.
+	 *		# outdegree[x] represents the numbers of edges outgoing from vertex x.
+	 *
+	 * We need to check:
+		if(indegree[x]==N-1 && outdegree[i]==0){
+		    return x;
+		}
+		
+	 * i.e if the number of edges incoming to the vertex is N-1 (which means N-1 person are trusting x), 
+	 * but there is no outgoing edge (x is not trusting anyone), then that edge represents a judge.
+
+	 * */
 	public int findJudge(int N, int[][] trust) {
 		if (trust.length == 0)
 			return N;
@@ -65,8 +85,9 @@ public class FindTheTownJudge {
 	public static void main(String[] args) {
 		//int[][] trust={{1,3},{1,4},{2,3},{2,4},{4,3}};
 		//int[][] trust={{1,2}};
-		int[][] trust={{1,2},{3,2},{3,4},{3,1},{1,4},{1,5},{2,3},{2,1},{4,3},{4,2},{5,1},{2,5},{5,3},{4,1},{2,4},{3,5}};//{{1,2},{2,3}};
-		System.out.println(new FindTheTownJudge().findJudge(2, trust));
-
+		//int[][] trust={{1,2},{2,3}};
+		int[][] trust={{1,2},{3,2},{3,4},{3,1},{1,4},{1,5},{2,3},
+				{2,1},{4,3},{4,2},{5,1},{2,5},{5,3},{4,1},{2,4},{3,5}};
+		System.out.println(new FindTheTownJudge().findJudge(5, trust));
 	}
 }
