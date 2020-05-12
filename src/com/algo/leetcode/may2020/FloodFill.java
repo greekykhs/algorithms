@@ -26,6 +26,24 @@ The length of image and image[0] will be in the range [1, 50].
 The given starting pixel will satisfy 0 <= sr < image.length and 0 <= sc < image[0].length.
 The value of each color in image[i][j] and newColor will be an integer in [0, 65535].*/
 public class FloodFill {
+	/*
+	 * Algorithm 
+	When we change the color, we will first check if the current color is same as new color. 
+		If yes, we won't do anything. Else, we will change the color of that location. 
+		After that we need to update the color at immediate top, bottom, left and 
+		right (any pixels connected 4-directionally to those pixels).
+	
+	To do this we will write a recursive function, which will take an 
+		extra parameter (which is old color).
+	
+	sr and sc should be greater than zero AND sr and sc should less than 
+		length of rows and columns respectively AND the color at sr sc position 
+		should not be same as newColor.
+	
+	In the recursive function, if the above conditions are satisfied we will 
+		update the color at sr sc position, and then call this recursive function 
+		for immediate right (sr+1, sc), left (sr-1, sc), top(sr, sc-1) and bottom (sr, sc+1).
+	 * */
 	public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
 		if(image[sr][sc]!=newColor)
 			floodFill(image, sr, sc, newColor, image[sr][sc]);
