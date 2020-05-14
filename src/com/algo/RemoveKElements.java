@@ -2,9 +2,10 @@ package com.algo;
 
 public class RemoveKElements {
 	public static void main(String[] args) {
-		System.out.println(removeKdigits("1432219", 3));// Output: 1219
-		System.out.println(removeKdigits("10200", 1)); // Output: 200
-		System.out.println(removeKdigits("12345111111177", 5)); // Output: 111111117
+		//System.out.println(removeKdigits("1432219", 3));// Output: 1219
+		//System.out.println(removeKdigits("10200", 1)); // Output: 200
+		//System.out.println(removeKdigits("12345111111177", 5)); // Output: 111111117
+		System.out.println(removeKdigits("10", 2)); // Output: 111111117
 	}
 
 	/*
