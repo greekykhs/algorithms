@@ -37,8 +37,8 @@ Note:
 -30000 < = A[i] < = 30000
 1 < = A.length < = 30000*/
 public class MaximumSumCircularSubarray {	
-	public int maxSubarraySumCircular(int[] A) {
-		if(A==null || A.length==0)
+	public int maxSubarraySumCircular1(int[] A) {
+		if(A==null || A.length==0) 
 			return 0;
 		int sum=A[0];
 		int maxTillNow=A[0], maxTotal=A[0];
@@ -65,4 +65,29 @@ public class MaximumSumCircularSubarray {
 			return Math.max(sum-minTotal, maxTotal);
 	}
 
+	public int maxSubarraySumCircular(int[] A) {
+		if(A==null || A.length==0) 
+			return 0;
+		int sum=0;
+		int maxTillNow=0, maxTotal=Integer.MIN_VALUE;
+		int minTillNow=0, minTotal=Integer.MAX_VALUE;
+		for (int a: A) {
+			sum+=a;
+			maxTillNow=Math.max(a+maxTillNow, a);
+			maxTotal=Math.max(maxTotal, maxTillNow);
+			
+			minTillNow=Math.min(a+minTillNow, a);
+			minTotal=Math.min(minTotal, minTillNow);
+		}
+		
+		if(maxTotal>0)
+			return Math.max(maxTotal, sum-minTotal);
+		return maxTotal;		
+		
+	}
+	public static void main(String[] args) {
+		MaximumSumCircularSubarray m=new MaximumSumCircularSubarray();
+		int[] A= {1,-2,3,-2};
+		System.out.println(m.maxSubarraySumCircular(A));
+	}
 }
