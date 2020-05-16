@@ -19,8 +19,29 @@ The first node is considered odd, the second node even and so on..
 */
 public class OddEvenLinkedList {
 	public ListNode oddEvenList(ListNode head) {
-		return head;
-	}
+		//corner case
+        if(head == null)
+            return null;
+        
+        //initialize odd and even nodes
+        ListNode odd = head;
+        ListNode even =head.next;     
+
+        //We need to remember the head of even list
+        //so that we can connect the even list after odd list
+        ListNode evenhead = even;
+        
+        while(even!=null && even.next !=null){
+            odd.next = even.next;
+            odd = odd.next;
+            even.next = odd.next;
+            even = even.next;
+        }
+        
+        //connecting even list after odd lists
+        odd.next = evenhead;
+        return head;
+    }
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
