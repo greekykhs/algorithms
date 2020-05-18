@@ -60,18 +60,16 @@ public class FindAllAnagrams {
             	//decrement the count in the map
             	pcharCountMap.put(cRight, pcharCountMap.get(cRight) - 1);
             	//when the count become zero, decrement numOfDistintCharInP
-                if (pcharCountMap.get(cRight) == 0) {
+                if (pcharCountMap.get(cRight) == 0)
                     numOfDistintCharInP -= 1;
-                }
-            }
+           }
 
             while (numOfDistintCharInP <= 0) {
                 cLeft = s.charAt(left);
                 if (pcharCountMap.containsKey(cLeft)) {
                 	pcharCountMap.put(cLeft, pcharCountMap.get(cLeft) + 1);
-                    if (pcharCountMap.get(cLeft) > 0) {
+                    if (pcharCountMap.get(cLeft) > 0)
                         numOfDistintCharInP += 1;
-                    }
                 }
                 if (right - left + 1 == p.length()) {
                 	output.add(left);
