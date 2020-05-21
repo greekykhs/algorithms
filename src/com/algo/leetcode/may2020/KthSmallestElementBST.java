@@ -31,48 +31,24 @@ Output: 3
 Follow up:
 What if the BST is modified (insert/delete operations) often and you need to find the kth smallest frequently? How would you optimize the kthSmallest routine?*/
 public class KthSmallestElementBST {
+	public static int kthSmallest(TreeNode root, AtomicInteger ai, int k) {
+		if (root == null)
+			return Integer.MAX_VALUE;
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		int left = kthSmallest(root.left, ai, k);
 
+		if (left != Integer.MAX_VALUE)
+			return left;
+
+		if (ai.incrementAndGet() == k)
+			return root.val;
+
+		return kthSmallest(root.right, ai, k);
 	}
-	// Function to find k'th smallest element in BST
-		// Here i denotes the number of nodes processed so far
-		public static int kthSmallest(TreeNode root, AtomicInteger i, int k)
-		{
-			// base case
-			if (root == null) {
-				return Integer.MAX_VALUE;
-			}
 
-			// search in left subtree
-			int left = kthSmallest(root.left, i, k);
-
-			// if k'th smallest is found in left subtree, return it
-			if (left != Integer.MAX_VALUE) {
-				return left;
-			}
-
-			// if current element is k'th smallest, return its value
-			if (i.incrementAndGet() == k) {
-				return root.val;
-			}
-
-			// else search in right subtree
-			return kthSmallest(root.right, i, k);
-		}
-
-		// Function to find k'th smallest element in BST
-		public static int kthSmallest(TreeNode root, int k)
-		{
-			// maintain index to count number of nodes processed so far
-			AtomicInteger i = new AtomicInteger(0);
-
-			// traverse the tree in in-order fashion and return k'th element
-			return kthSmallest(root, i, k);
-		}
-
-
+	public static int kthSmallest(TreeNode root, int k) {
+		return kthSmallest(root, new AtomicInteger(0), k);
+	}
 }
 /*
 public class TreeNode {
