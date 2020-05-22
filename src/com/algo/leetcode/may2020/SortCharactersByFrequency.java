@@ -3,6 +3,7 @@ package com.algo.leetcode.may2020;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.PriorityQueue;
 
 /*Sort Characters By Frequency
 
@@ -31,8 +32,46 @@ Note that 'A' and 'a' are treated as two different characters.
 
 */
 public class SortCharactersByFrequency {
-	
+	//using priority queue
 	public String frequencySort(String s) {
+		//corner case
+		if (s == null || s.length() == 0)
+			return s;
+		
+		//cntArry will maintain the count of each character
+		//there are a total 256 characters that's why size is 256
+		int[] cntArry=new int[256];
+		for (char c : s.toCharArray())
+			cntArry[c]++;
+		
+		//Comparator is added in the priority queue, here the
+		//comparison will be based on the frequency with which
+		//any character is present in the count array i.e cntArry		
+		PriorityQueue<Character> pq=new PriorityQueue<>(
+				(a,b)-> cntArry[b]-cntArry[a]);
+		
+		//character been added is based on the fact what 
+		//is the frequency of it in the counter
+		for(int i=0; i<256; i++) 
+			pq.offer((char)i);
+		
+		StringBuilder sb=new StringBuilder();
+		Character c;
+		while(!pq.isEmpty()) {
+			//poll will first give the character which is present
+			//max number of times
+			c=pq.poll();
+			//append the character in string builder depending on 
+			//the frequency present in count array
+			for(int i=0; i<cntArry[c]; i++) {
+				sb.append(c);
+			}
+		}
+		return sb.toString();
+	}
+	
+	//using hash map
+	public String frequencySort1(String s) {
 		StringBuilder res = new StringBuilder();
 		if (s == null || s.length() == 0)
 			return res.toString();
