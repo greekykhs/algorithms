@@ -28,7 +28,8 @@ class ConstructBSTFromPreOrder
 	 * 4). Call the recursive function for the right sub-tree with keys in the preorder 
 	 * 	sequence that appears after the i'th index (including i'th index)
 	 * */
-	public TreeNode constructTree(int preorder[], Index preIndex, int key, int min, int max) {
+	public TreeNode constructTree(int preorder[], Index preIndex, 
+			int key, int min, int max) {
 		int size=preorder.length;
 		if (preIndex.index >= size)
 			return null;
@@ -40,15 +41,18 @@ class ConstructBSTFromPreOrder
 			preIndex.index = preIndex.index + 1;
 
 			if (preIndex.index < size)
-				root.left = constructTree(preorder, preIndex, preorder[preIndex.index], min, key);
+				root.left = constructTree(preorder, preIndex,
+						preorder[preIndex.index], min, key);
 			if (preIndex.index < size)
-				root.right = constructTree(preorder, preIndex, preorder[preIndex.index], key, max);
+				root.right = constructTree(preorder, preIndex, 
+						preorder[preIndex.index], key, max);
 		}
 		return root;
 	}
   
     public TreeNode bstFromPreorder(int[] preorder) {
-    	return constructTree(preorder, index, preorder[0], Integer.MIN_VALUE, Integer.MAX_VALUE);
+    	return constructTree(preorder, index, preorder[0], 
+    			Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
 	public void printInorder(TreeNode node) {
