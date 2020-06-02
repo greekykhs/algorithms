@@ -1,4 +1,4 @@
-package com.algo.leetcode;
+package com.algo.leetcode.june2020;
 /*
 	Delete Node in a Linked List
 	Write a function to delete a node (except the tail) in a singly linked list, given only access to that node.
