@@ -8,6 +8,11 @@ package com.algo.btree;
  * are identical or not, we need to traverse both the trees 
  * simultaneously, and in each iteration we will compare 
  * the data of current node and the children of both the trees.
+ * 
+ * Time Complexity
+ * It depend on the tree with lesser number of nodes. 
+ * Let say the nodes in two trees be x and y then complexity 
+ * of above approach is is O(x) where x < y.
  * */
 public class IdenticalBinaryTrees {
 	boolean isIdentical(Node n1, Node n2) {

@@ -6,6 +6,9 @@ package com.algo.btree;
  * To verify if a tree is subtree of another, we need to traverse the Tree T 
  * in a preorder fashion.For every visited node in the traversal, 
  * see if the subtree rooted with this node is identical to another tree S.
+ * 
+ * Time Complexity: Time worst case complexity of above solution is O(xy), 
+ * where x and y are number of nodes in given two trees.
  * */
 public class CheckSubTree {
 	IdenticalBinaryTrees ibt=new IdenticalBinaryTrees();
