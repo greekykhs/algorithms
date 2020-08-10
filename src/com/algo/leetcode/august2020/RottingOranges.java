@@ -34,13 +34,7 @@ Note:
 1 <= grid[0].length <= 10
 grid[i][j] is only 0, 1, or 2.*/
 
-public class RottingOranges {
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-	
+public class RottingOranges {	
 	public int orangesRotting(int[][] grid) {
 		if (grid == null || grid.length == 0)
 			return 0;
